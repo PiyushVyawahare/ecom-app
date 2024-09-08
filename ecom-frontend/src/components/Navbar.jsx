@@ -25,8 +25,8 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
       <header>
         <nav className='navbar navbar-expand-lg fixed-top'>
           <div className='container-fluid'>
-            <a className='navbar-brand' href='https://www.github.com/PiyushVyawahare'>
-              VYAWPIY
+            <a className='navbar-brand' href='https://telusko.com/'>
+              Telusko
             </a>
             <button
               className='navbar-toggler'
@@ -69,11 +69,11 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
                 {theme === "dark-theme" ? <i className='bi bi-moon-fill'></i> : <i className='bi bi-sun-fill'></i>}
               </button>
               <div className='d-flex align-items-center cart'>
-                {/* <a href="/cart" className="nav-link text-dark"> */}
-                <i className='bi bi-cart me-2' style={{ display: "flex", alignItems: "center" }}>
-                  Cart
-                </i>
-                {/* </a> */}
+                <a href='/cart' className='nav-link text-dark'>
+                  <i className='bi bi-cart me-2' style={{ display: "flex", alignItems: "center" }}>
+                    Cart
+                  </i>
+                </a>
 
                 <input className='form-control me-2' type='search' placeholder='Search' aria-label='Search' />
                 <div />
