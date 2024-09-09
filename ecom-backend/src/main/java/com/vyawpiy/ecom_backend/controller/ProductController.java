@@ -36,16 +36,38 @@ public class ProductController {
     @GetMapping("/product/{productId}/image")
     public ResponseEntity<byte[]> getProductImage(@PathVariable int productId) {
         Product product = service.getProductById(productId);
-        return new ResponseEntity<>(product.getImageData(), HttpStatus.OK);
+        if(product != null) return new ResponseEntity<>(product.getImageData(), HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/product")
     public ResponseEntity<?> addProduct(@RequestPart Product product, @RequestPart MultipartFile imageFile) {
         try {
-            service.addProduct(product, imageFile);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            Product savedProduct = service.addOrUpdateProduct(product, imageFile);
+            return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
         } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PutMapping("/product/{productId}")
+    public ResponseEntity<?> updateProduct(@PathVariable int productId, @RequestPart Product product, @RequestPart MultipartFile imageFile) {
+        try {
+            Product updatedProduct = service.addOrUpdateProduct(product, imageFile);
+            return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/product/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable int productId) {
+        Product product = service.getProductById(productId);
+        if(product != null) {
+            service.deleteProduct(productId);
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

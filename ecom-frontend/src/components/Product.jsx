@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 import AppContext from "../context/Context";
 import axios from "../axios";
-// import UpdateProduct from "./UpdateProduct";
+import UpdateProduct from "./UpdateProduct";
 const Product = () => {
   const { id } = useParams();
   const { data, addToCart, removeFromCart, cart, refreshData } = useContext(AppContext);
@@ -90,23 +90,15 @@ const Product = () => {
               <i> {new Date(product.releaseDate).toLocaleDateString()}</i>
             </p>
           </div>
-          {/* <div className="update-button ">
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={handleEditClick}
-            >
+          <div className='update-button '>
+            <button className='btn btn-primary' type='button' onClick={handleEditClick}>
               Update
             </button>
-        
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={deleteProduct}
-            >
+            {/* <UpdateProduct product={product} onUpdate={handleUpdate} /> */}
+            <button className='btn btn-primary' type='button' onClick={deleteProduct}>
               Delete
             </button>
-          </div> */}
+          </div>
         </div>
       </div>
     </>

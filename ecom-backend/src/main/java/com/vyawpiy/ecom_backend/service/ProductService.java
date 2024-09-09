@@ -23,10 +23,14 @@ public class ProductService {
         return repo.findById(productId).orElse(null);
     }
 
-    public void addProduct(Product product, MultipartFile imageFile) throws IOException {
+    public Product addOrUpdateProduct(Product product, MultipartFile imageFile) throws IOException {
         product.setImageName(imageFile.getOriginalFilename());
         product.setImageType(imageFile.getContentType());
         product.setImageData(imageFile.getBytes());
-        repo.save(product);
+        return repo.save(product);
+    }
+
+    public void deleteProduct(int productId) {
+        repo.deleteById(productId);
     }
 }
