@@ -33,4 +33,9 @@ public class ProductService {
     public void deleteProduct(int productId) {
         repo.deleteById(productId);
     }
+
+    public List<Product> searchProduct(String keyword) {
+//        return repo.findByNameContaining(keyword);
+        return repo.searchProduct(keyword);
+    }
 }
